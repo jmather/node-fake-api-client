@@ -1,0 +1,7 @@
+endpoints:
+  - method: get
+    path: /test
+    responses:
+      - status: 200
+        content: '{"foo": "bar"}'
+        content_type: application/json
