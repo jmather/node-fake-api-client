@@ -1,3 +1,4 @@
+external_id: test
 endpoints:
   - method: get
     path: /test

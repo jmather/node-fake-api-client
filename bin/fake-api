@@ -19,9 +19,11 @@ cli.parse(
 );
 
 cli.main((args, options) => {
+    let cmd = null;
+
     switch (cli.command) {
         case 'register':
-            registerCommand(args, options);
+            cmd = registerCommand(args, options);
             break;
 
         case 'validate':
@@ -33,5 +35,11 @@ cli.main((args, options) => {
             cli.getUsage();
             cli.exit(0);
             break;
+    }
+
+    if (cmd) {
+        cmd.then(() => {
+            process.exit(0);
+        });
     }
 });

@@ -1,4 +1,5 @@
 const cli = require('cli');
+const Promise = require('bluebird');
 
 const collections = require('../services/collections');
 const FakeAPI = require('../services/fake-api');
@@ -11,9 +12,20 @@ module.exports = (args, options) => {
 
     const file = args[0];
 
-    collections.load(file, options.server).then(collection => {
+    return collections.load(file, options.server).then(collection => {
         const fakeApi = new FakeAPI(collection.server);
 
-        return fakeApi.register('test');
+        return fakeApi.register(collection.external_id || 'node-fakeapi-client').tap(userData => {
+            const endpoints = [];
+
+            collection.endpoints.forEach(endpoint => endpoints.push(fakeApi.record(endpoint)));
+
+            return Promise.all(endpoints).then((registeredEndpoints) => {
+                userData.endpoints = registeredEndpoints;
+                return userData;
+            });
+        });
+    }).then(userData => {
+        console.log(JSON.stringify(userData, null, 2));
     });
 };

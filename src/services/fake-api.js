@@ -11,7 +11,7 @@ class FakeAPI {
         };
     }
 
-    setAutentication(username, password) {
+    setAuthentication(username, password) {
         this.auth.user = username;
         this.auth.pass = password;
     }
@@ -22,28 +22,32 @@ class FakeAPI {
             uri: this.server,
             headers: {
                 'X-FakeAPI-Action': 'register',
-                'X-FakeAPI-ExternalId': external_id,
-            }
+            },
+            body: {
+                external_id: 'node-fakeapi-client',
+            },
+            json: true,
         };
 
-        return request(registerRequest).then(response => {
-            return JSON.parse(response);
-        })
+        return request(registerRequest).then(userData => {
+            this.setAuthentication(userData.username, userData.password);
+            return userData;
+        });
     }
 
     record(endpoint) {
         const recordRequest = {
-            method: 'post',
+            method: 'put',
             uri: this.server,
             headers: {
                 'X-FakeAPI-Action': 'record',
             },
+            body: endpoint,
+            json: true,
             auth: this.auth,
         };
 
-        return request(recordRequest).then(response => {
-            return JSON.parse(response);
-        })
+        return request(recordRequest);
     }
 }
 

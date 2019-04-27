@@ -66,6 +66,9 @@ const collections = {
                     type: 'string',
                     format: 'uri'
                 },
+                external_id: {
+                    type: 'string'
+                },
                 endpoints: {
                     type: 'array',
                     minItems: 1,
@@ -73,7 +76,9 @@ const collections = {
                         '$ref': '#/definitions/Endpoint'
                     }
                 }
-            }
+            },
+            required: [ 'endpoints' ],
+            additionalProperties: false,
         };
 
         return schema;
