@@ -27,7 +27,7 @@ const collections = {
 
         server = data.server || server;
 
-        const path = server + '/fakeapi-schema.json';
+        const path = server + '/fake-api-schema.json';
 
         if (cache[path]) {
             return cache[path];
@@ -35,7 +35,7 @@ const collections = {
 
         const schemaRequest = {
             method: 'get',
-            uri: server + '/fakeapi-schema.json',
+            uri: server + '/fake-api-schema.json',
         };
 
         return cache[path] = request(schemaRequest).then(response => {

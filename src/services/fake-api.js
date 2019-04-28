@@ -24,7 +24,7 @@ class FakeAPI {
                 'X-FakeAPI-Action': 'register',
             },
             body: {
-                external_id: 'node-fakeapi-client',
+                external_id: 'node-fake-api-client',
             },
             json: true,
         };

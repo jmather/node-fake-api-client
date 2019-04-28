@@ -15,7 +15,7 @@ module.exports = (args, options) => {
     return collections.load(file, options.server).then(collection => {
         const fakeApi = new FakeAPI(collection.server);
 
-        return fakeApi.register(collection.external_id || 'node-fakeapi-client').tap(userData => {
+        return fakeApi.register(collection.external_id || 'node-fake-api-client').tap(userData => {
             const endpoints = [];
 
             collection.endpoints.forEach(endpoint => endpoints.push(fakeApi.record(endpoint)));
