@@ -1,9 +1,9 @@
 {
   "name": "node-fake-api-client",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/jmather/node-fake-api-client#readme",
   "license": "Apache-2.0",
-  "main": "src/fake-api.js",
+  "main": "src/fake-api-client.js",
   "bin": {
     "fake-api": "./bin/fake-api"
   },

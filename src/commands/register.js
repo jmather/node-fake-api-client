@@ -2,7 +2,7 @@ const cli = require('cli');
 const Promise = require('bluebird');
 
 const collections = require('../services/collections');
-const FakeAPI = require('../fake-api');
+const FakeAPI = require('../fake-api-client');
 
 module.exports = (args, options) => {
     if (args.length < 1) {

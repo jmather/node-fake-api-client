@@ -11,8 +11,21 @@ const ajv = new Ajv();
 
 const cache = {};
 
-const collections = {
-    load: (file, server) => {
+/**
+ * @typedef {Object} Collection
+ * @property {url} [server] - The server to point the collection to.
+ * @property {string} [external_id] - External ID to reference for this collection.
+ * @property {Endpoint[]} endpoints - Endpoints to register for this collection.
+ */
+
+class Collections {
+    /**
+     * Load a context file from the filesystem.
+     * @param {file} file
+     * @param {url} [server] - Server to reference
+     * @returns {Promise<Collection>}
+     */
+    static load(file, server) {
         if (fs.existsSync(file) === false) {
             throw new ContextError("Could not find file", { file });
         }
@@ -35,12 +48,12 @@ const collections = {
 
         const schemaRequest = {
             method: 'get',
-            uri: server + '/fake-api-schema.json',
+            uri: path,
         };
 
         return cache[path] = request(schemaRequest).then(response => {
 
-            const schema = collections.createSchema(JSON.parse(response));
+            const schema = Collections.createSchema(JSON.parse(response));
 
             if (ajv.validate(schema, data) === false) {
                 throw new ContextError("Collection definition is not valid.", { data, validation_errors: ajv.errors });
@@ -50,9 +63,9 @@ const collections = {
 
             return data;
         });
-    },
+    }
 
-    createSchema: serverSchema => {
+    static createSchema(serverSchema) {
         const schema = {
             '$ref': '#/definitions/Collection',
             definitions: serverSchema.definitions
@@ -83,6 +96,6 @@ const collections = {
 
         return schema;
     }
-};
+}
 
-module.exports = collections;
+module.exports = Collections;
