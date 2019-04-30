@@ -32,8 +32,8 @@ endpoints:
 ## Usage
 
 ```
-npm install
-node ./bin/fake-api register -s https://node-fake-api-server.herokuapp.com/ examples/sample.yaml
+npm install -g node-fake-api-client
+fake-api register -s https://node-fake-api-server.herokuapp.com/ examples/sample.yaml
 {
   "username": "935c5ba7-bff1-47f8-a9bd-a855c0ecadb0",
   "password": "951fa676-8304-4e2a-b854-9d00beecd844",

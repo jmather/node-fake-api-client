@@ -1,7 +1,16 @@
 {
   "name": "node-fake-api-client",
-  "version": "0.1.0",
-  "main": "bin/fake-api",
+  "version": "0.1.1",
+  "homepage": "https://github.com/jmather/node-fake-api-client#readme",
+  "license": "Apache-2.0",
+  "main": "src/fake-api.js",
+  "bin": {
+    "fake-api": "./bin/fake-api"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github:jmather/node-fake-api-client"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

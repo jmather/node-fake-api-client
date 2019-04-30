@@ -1,7 +1,7 @@
 require('any-promise/register/bluebird');
 const request = require('request-promise-any');
 
-const ContextError = require('../context-error');
+const ContextError = require('./context-error');
 
 class FakeAPI {
     constructor(server) {
