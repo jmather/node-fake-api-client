@@ -76,7 +76,7 @@ class FakeApiClient {
                 'X-FakeAPI-Action': 'register',
             },
             body: {
-                external_id: external_id || 'node-fake-api-client',
+                external_id: external_id || 'node-fake-api.js-client',
             },
             json: true,
             resolveWithFullResponse: true,

@@ -40,7 +40,7 @@ class Collections {
 
         server = data.server || server;
 
-        const path = server + '/fake-api-schema.json';
+        const path = server + '/fake-api.js-schema.json';
 
         if (cache[path]) {
             return cache[path];

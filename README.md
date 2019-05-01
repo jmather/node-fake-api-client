@@ -13,7 +13,7 @@ A server instance has been set up at [https://node-fake-api-server.herokuapp.com
 ## Schema
 
 ```yaml
-server: https://node-fake-api-server.herokuapp.com/ # Optional, may provide or override via CLI
+server: fake-api.js # Optional, may provide or override via CLI
 external_id: readme-example # Optional.
 endpoints:
 - method: get
