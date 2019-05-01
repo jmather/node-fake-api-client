@@ -25,7 +25,7 @@ endpoints:
   - status: 200
     content: Foo!
     content_type: text/plain
-    response_delay: 0 # or any value up to 60000 (60 seconds)
+    delay: 0 # or any value up to 60000 (60 seconds)
     headers:
       server: me!! # define response headers
 ```
@@ -47,7 +47,7 @@ fake-api register -s https://node-fake-api-server.herokuapp.com/ examples/sample
           "status": 200,
           "content": "{\"foo\": \"bar\"}",
           "content_type": "application/json",
-          "response_delay": 0
+          "delay": 0
         }
       ],
       "response_mode": "incremental"

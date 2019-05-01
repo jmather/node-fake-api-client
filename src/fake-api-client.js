@@ -1,7 +1,6 @@
 require('any-promise/register/bluebird');
 const request = require('request-promise-any');
-
-const ContextError = require('./context-error');
+const debug = require('debug')('fake-api:client');
 
 /**
  * A registration response
@@ -18,7 +17,7 @@ const ContextError = require('./context-error');
  * @property {string} content - The content to respond with.
  * @property {string} content_type - The content type to respond with.
  * @property {Object} headers - Headers to add to the response.
- * @property {number} response_delay - How long to delay before sending the response, in ms, defaults to 0, max is 60000.
+ * @property {number} delay - How long to delay before sending the response, in ms, defaults to 0, max is 60000.
  */
 
 /**
@@ -36,7 +35,7 @@ const ContextError = require('./context-error');
  * @property {Object} headers - Headers to require in order to match the response.
  * @property {Object} query_parameters - Query parameters to require in order to match the response.
  * @property {ResponseMode} response_mode - Response mode to use.
- * @property {Response[]} responses - Responses to define.
+ * @property {EndpointResponse[]} responses - Responses to define.
  */
 
 class FakeApiClient {
@@ -79,9 +78,17 @@ class FakeApiClient {
                 external_id: 'node-fake-api-client',
             },
             json: true,
+            resolveWithFullResponse: true,
         };
 
-        return request(registerRequest).then(userData => {
+        return request(registerRequest).then(response => {
+            if (response.statusCode !== 201) {
+                const context = buildErrorContext(registerRequest, response);
+
+                throw new ContextError('Received unexpected response from server', context);
+            }
+
+            const userData = response.body;
             this.setAuthentication(userData.username, userData.password);
             return userData;
         });
@@ -102,10 +109,30 @@ class FakeApiClient {
             body: endpoint,
             json: true,
             auth: this.auth,
+            resolveWithFullResponse: true,
         };
 
-        return request(recordRequest);
+        return request(recordRequest).then(response => {
+            if (response.statusCode !== 201) {
+                const context = buildErrorContext(recordRequest, response);
+
+                throw new ContextError('Received unexpected response from server', context);
+            }
+
+            return response.body;
+        });
     }
+}
+
+function buildErrorContext(request, response) {
+    return {
+        request,
+        response: {
+            status: response.statusCode,
+            body: response.body,
+            headers: response.headers,
+        },
+    };
 }
 
 module.exports = FakeApiClient;
