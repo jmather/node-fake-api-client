@@ -1,6 +1,7 @@
 require('any-promise/register/bluebird');
 const request = require('request-promise-any');
-const debug = require('debug')('fake-api:client');
+
+const ContextError = require('./context-error');
 
 /**
  * A registration response
@@ -75,7 +76,7 @@ class FakeApiClient {
                 'X-FakeAPI-Action': 'register',
             },
             body: {
-                external_id: 'node-fake-api-client',
+                external_id: external_id || 'node-fake-api-client',
             },
             json: true,
             resolveWithFullResponse: true,

@@ -12,7 +12,8 @@
     "url": "github:jmather/node-fake-api-client"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint **/*.js"
   },
   "dependencies": {
     "ajv": "^6.10.0",
@@ -23,5 +24,8 @@
     "js-yaml": "^3.13.1",
     "request": "^2.88.0",
     "request-promise-any": "^1.0.7"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0"
   }
 }

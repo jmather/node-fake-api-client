@@ -12,20 +12,20 @@ module.exports = (args, options) => {
 
     const file = args[0];
 
-    return collections.load(file, options.server).then(collection => {
+    return collections.load(file, options.server).then((collection) => {
         const fakeApi = new FakeAPI(collection.server);
 
-        return fakeApi.register(collection.external_id || 'node-fake-api-client').tap(userData => {
+        return fakeApi.register(collection.external_id || 'node-fake-api-client').tap((userData) => {
             const endpoints = [];
 
-            collection.endpoints.forEach(endpoint => endpoints.push(fakeApi.record(endpoint)));
+            collection.endpoints.forEach((endpoint) => endpoints.push(fakeApi.record(endpoint)));
 
             return Promise.all(endpoints).then((registeredEndpoints) => {
                 userData.endpoints = registeredEndpoints;
                 return userData;
             });
         });
-    }).then(userData => {
-        console.log(JSON.stringify(userData, null, 2));
+    }).then((userData) => {
+        cli.output(JSON.stringify(userData, null, 2));
     });
 };

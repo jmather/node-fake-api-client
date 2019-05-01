@@ -1,5 +1,7 @@
 # Fake API Server
 
+[![DeepScan grade](https://deepscan.io/api/teams/2509/projects/5226/branches/40565/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=2509&pid=5226&bid=40565)
+
 This tool allows you to register collections of arbitrary endpoints to mock responses for against the [Fake API Server](https://github.com/jmather/node-fake-api-server), allowing you to easily test your code end-to-end.
 
 Pair with the [Fake API Server](https://github.com/jmather/node-fake-api-server) for easy collection registration.
@@ -10,7 +12,7 @@ A server instance has been set up at [https://node-fake-api-server.herokuapp.com
 
 ## Schema
 
-```
+```yaml
 server: https://node-fake-api-server.herokuapp.com/ # Optional, may provide or override via CLI
 external_id: readme-example # Optional.
 endpoints:
@@ -31,7 +33,7 @@ endpoints:
 ```
 ## Usage
 
-```
+```bash
 npm install -g node-fake-api-client
 fake-api register -s https://node-fake-api-server.herokuapp.com/ examples/sample.yaml
 {
