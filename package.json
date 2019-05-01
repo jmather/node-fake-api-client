@@ -13,7 +13,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint bin/fake-api.js **/*.js"
+    "lint": "eslint \"**/*.js\""
   },
   "dependencies": {
     "ajv": "^6.10.0",
